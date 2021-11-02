@@ -3,11 +3,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import AddIcon from "@material-ui/icons/Add";
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
+import User from './components/User';
 
 const api = "https://fetnocampbackend.herokuapp.com/user";
 
@@ -51,14 +47,7 @@ function App() {
               {email.map((user, idx) => {
                 return (
                   <div key={idx}>
-                    <ListItem>
-                      <ListItemAvatar>
-                        <Avatar>
-                          <ImageIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={user.username} secondary="Jan 9, 2014" />
-                    </ListItem>
+                    <User user={user.username} />
                   </div>
                 );
               })}
