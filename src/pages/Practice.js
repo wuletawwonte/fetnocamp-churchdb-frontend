@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import AddIcon from "@material-ui/icons/Add";
 import List from "@mui/material/List";
 import User from "../components/User";
+import { LinearProgress } from "@material-ui/core";
 
 export default function Practice() {
   const [counter, setCounter] = useState(0);
@@ -52,7 +53,7 @@ export default function Practice() {
             </List>
           </>
         ) : (
-          "Loading..."
+          <LinearProgress />
         )}
       </header>
     </Container>

@@ -1,18 +1,15 @@
-import MainNavbar from './components/MainNavbar';
-import Login from './pages/Login';
-import Practice from './pages/Practice';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import MainNavbar from "./components/MainNavbar";
+import Login from "./pages/Login";
+import Practice from "./pages/Practice";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import './app.css';
 
 function App() {
-  return <>
-  <Router>
-    <MainNavbar />
-    <Switch>
+  return (
+    <>
+      <Router>
+        <MainNavbar sx={{mb: 8}} />
+        <Switch>
           <Route exact path="/">
             <Practice />
           </Route>
@@ -20,9 +17,9 @@ function App() {
             <Login />
           </Route>
         </Switch>
-    </Router>
-  </>
-
+      </Router>
+    </>
+  );
 }
 
 export default App;

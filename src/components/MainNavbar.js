@@ -1,18 +1,28 @@
-import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar } from '@material-ui/core';
-import FacebookIcon from '@material-ui/icons/Facebook';
+import { Redirect, useHistory } from 'react-router-dom';
+import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
-const MainNavbar = (props) => (
-  <AppBar
-    elevation={0}
+const MainNavbar = (props) => {
+  const history = useHistory();
+  return <AppBar
     {...props}
+    position="sticky"
   >
-    <Toolbar sx={{ height: 64 }}>
-      <RouterLink to="/">
-        <FacebookIcon />
-      </RouterLink>
+    <Toolbar sx={{ height: 40 }}>
+      <IconButton 
+        size="medium"
+        edge="start"
+        color="inherit" 
+        aria-label="Menu"
+        onClick={() => <Redirect to="/" />}
+        >
+          <MenuIcon />
+      </IconButton>
+      <Typography variant="h6" component="div" onClick={() => {history.push('/');}}>
+        ChurchDb
+      </Typography>
     </Toolbar>
-  </AppBar>
-);
+  </AppBar>;
+}
 
 export default MainNavbar;
