@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import AddIcon from "@material-ui/icons/Add";
-import List from '@mui/material/List';
-import User from '../components/User';
-
-const api = "https://fetnocampbackend.herokuapp.com/user";
+import List from "@mui/material/List";
+import User from "../components/User";
 
 export default function Practice() {
   const [counter, setCounter] = useState(0);
@@ -16,7 +14,7 @@ export default function Practice() {
   };
 
   useEffect(() => {
-    fetch(api)
+    fetch(process.env.REACT_APP_BACKEND_API)
       .then((response) => response.json())
       .then((data) => {
         setEmail(data);
