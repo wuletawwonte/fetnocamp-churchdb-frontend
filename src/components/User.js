@@ -1,7 +1,7 @@
 import { ListItem, ListItemAvatar, Avatar, ListItemText} from "@material-ui/core";
 import ImageIcon from '@material-ui/icons/Image';
 
-function User({user}) {
+function User(props) {
   return (
     <>
       <ListItem>
@@ -10,7 +10,7 @@ function User({user}) {
             <ImageIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={user} secondary="Jan 9, 2014" />
+        <ListItemText primary={props.children.username} secondary="Jan 9, 2014" />
       </ListItem>
     </>
   );

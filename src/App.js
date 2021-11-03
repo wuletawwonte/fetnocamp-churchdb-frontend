@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import AddIcon from "@material-ui/icons/Add";
 import List from '@mui/material/List';
 import User from './components/User';
+import './app.css';
 
 const api = "https://fetnocampbackend.herokuapp.com/user";
 
@@ -38,7 +39,7 @@ function App() {
         >
           Increment
         </Button>
-        <br />
+        <hr />
         {email.length !== 0 ? (
           <>
             <List
@@ -47,7 +48,7 @@ function App() {
               {email.map((user, idx) => {
                 return (
                   <div key={idx}>
-                    <User user={user.username} />
+                    <User>{user}</User>
                   </div>
                 );
               })}
