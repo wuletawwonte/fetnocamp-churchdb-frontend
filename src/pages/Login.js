@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import {
   Box,
   Button,
@@ -6,14 +6,16 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import {UserContext} from '../context/UserContext';
 
 const Login = () => {
+    const {user, setUser} = useContext(UserContext);
   const email = useRef("");
   const password = useRef("sdfsd");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // axio
+    console.log(email.current.value);
   };
 
   return (
