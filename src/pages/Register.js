@@ -1,25 +1,48 @@
+import { useRef } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormHelperText,
   Link,
   TextField,
   Typography
 } from '@material-ui/core';
+import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
+
+  const firstName = useRef("");
+  const lastName = useRef("");
+  const email = useRef("");
+  const password = useRef("");
+
+    const submitHandler = () => {
+        const user = {
+            "firstname": firstName.current.value,
+            "lastname": lastName.current.value,
+            "username": email.current.value,
+            "password": password.current.value,
+        };
+        axios.post('https://fetnocampbackend.herokuapp.com/user/register', user)
+            .then((response) => {
+                console.log(response);
+                navigate('/login');
+            })
+            .catch((err) => {
+                console.log(err);
+                navigate('/register');
+            });
+
+    }
 
   return (
     <>
       <Box
         sx={{
-          backgroundColor: 'background.default',
           display: 'flex',
           flexDirection: 'column',
           height: '100%',
@@ -32,20 +55,18 @@ const Register = () => {
               email: '',
               firstName: '',
               lastName: '',
-              password: '',
-              policy: false
+              password: ''
             }}
             validationSchema={
             Yup.object().shape({
               email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
               firstName: Yup.string().max(255).required('First name is required'),
               lastName: Yup.string().max(255).required('Last name is required'),
-              password: Yup.string().max(255).required('password is required'),
-              policy: Yup.boolean().oneOf([true], 'This field must be checked')
+              password: Yup.string().max(255).required('password is required')              
             })
           }
             onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
+                submitHandler();
             }}
           >
             {({
@@ -58,10 +79,10 @@ const Register = () => {
               values
             }) => (
               <form onSubmit={handleSubmit}>
-                <Box sx={{ mb: 3 }}>
+                <Box sx={{ mb: 3, mt: 3 }}>
                   <Typography
                     color="textPrimary"
-                    variant="h2"
+                    variant="h4"
                   >
                     Create new account
                   </Typography>
@@ -84,6 +105,7 @@ const Register = () => {
                   onChange={handleChange}
                   value={values.firstName}
                   variant="outlined"
+                  inputRef={firstName}                  
                 />
                 <TextField
                   error={Boolean(touched.lastName && errors.lastName)}
@@ -96,6 +118,7 @@ const Register = () => {
                   onChange={handleChange}
                   value={values.lastName}
                   variant="outlined"
+                  inputRef={lastName}                  
                 />
                 <TextField
                   error={Boolean(touched.email && errors.email)}
@@ -109,6 +132,7 @@ const Register = () => {
                   type="email"
                   value={values.email}
                   variant="outlined"
+                  inputRef={email}                  
                 />
                 <TextField
                   error={Boolean(touched.password && errors.password)}
@@ -122,41 +146,8 @@ const Register = () => {
                   type="password"
                   value={values.password}
                   variant="outlined"
+                  inputRef={password}                  
                 />
-                <Box
-                  sx={{
-                    alignItems: 'center',
-                    display: 'flex',
-                    ml: -1
-                  }}
-                >
-                  <Checkbox
-                    checked={values.policy}
-                    name="policy"
-                    onChange={handleChange}
-                  />
-                  <Typography
-                    color="textSecondary"
-                    variant="body1"
-                  >
-                    I have read the
-                    {' '}
-                    <Link
-                      color="primary"
-                      component={RouterLink}
-                      to="#"
-                      underline="always"
-                      variant="h6"
-                    >
-                      Terms and Conditions
-                    </Link>
-                  </Typography>
-                </Box>
-                {Boolean(touched.policy && errors.policy) && (
-                <FormHelperText error>
-                  {errors.policy}
-                </FormHelperText>
-                )}
                 <Box sx={{ py: 2 }}>
                   <Button
                     color="primary"

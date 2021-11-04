@@ -14,7 +14,7 @@ import axios from "axios";
 const Login = () => {
   const { user, setUser } = useContext(UserContext);
   const username = useRef("");
-  const password = useRef("sdfsd");
+  const password = useRef("");
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -35,7 +35,6 @@ const Login = () => {
     <>
       <Box
         sx={{
-          backgroundColor: "#f4f6f8",
           display: "flex",
           flexDirection: "column",
           height: "100%",
