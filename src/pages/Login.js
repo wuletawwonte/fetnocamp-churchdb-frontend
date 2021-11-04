@@ -24,7 +24,7 @@ const Login = () => {
         password: password.current.value,
       })
       .then((res) => {
-        setUser(JSON.stringify(res.data, null, 2));
+          console.log(res.data);
       })
       .catch((err) => {
         setUser(JSON.stringify(err.data, null, 2));
