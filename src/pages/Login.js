@@ -24,10 +24,10 @@ const Login = () => {
         password: password.current.value,
       })
       .then((res) => {
-        setUser(JSON.stringify(res, null, 2));
+        setUser(JSON.stringify(res.data, null, 2));
       })
       .catch((err) => {
-        setUser(JSON.stringify(err, null, 2));
+        setUser(JSON.stringify(err.data, null, 2));
       });
   };
 
