@@ -1,3 +1,4 @@
+import { Link as RouterLink } from 'react-router-dom';
 import { useRef, useContext } from "react";
 import {
   Box,
@@ -5,17 +6,29 @@ import {
   Container,
   TextField,
   Typography,
+  Link
 } from "@material-ui/core";
-import {UserContext} from '../context/UserContext';
+import { UserContext } from "../context/UserContext";
+import axios from "axios";
 
 const Login = () => {
-    const {user, setUser} = useContext(UserContext);
-  const email = useRef("");
+  const { user, setUser } = useContext(UserContext);
+  const username = useRef("");
   const password = useRef("sdfsd");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(email.current.value);
+    axios
+      .post("https://fetnocampbackend.herokuapp.com/user/login", {
+        username: username.current.value,
+        password: password.current.value,
+      })
+      .then((res) => {
+        setUser(JSON.stringify(res, null, 2));
+      })
+      .catch((err) => {
+        setUser(JSON.stringify(err, null, 2));
+      });
   };
 
   return (
@@ -38,17 +51,22 @@ const Login = () => {
             </Box>
             <Box sx={{ pb: 1, pt: 1 }}>
               <Typography color="textSecondary" variant="body1">
-                Login with email address
+                Login with your credentials
+              </Typography>
+            </Box>
+            <Box sx={{ pb: 1, pt: 1 }}>
+              <Typography color="textSecondary" variant="body1">
+                {user}
               </Typography>
             </Box>
             <TextField
               fullWidth
-              label="Email Address"
+              label="Username"
               margin="normal"
-              name="email"
-              type="email"
+              name="username"
+              type="text"
               variant="outlined"
-              inputRef={email}
+              inputRef={username}
             />
             <TextField
               fullWidth
@@ -72,6 +90,14 @@ const Login = () => {
             </Box>
             <Typography color="textSecondary" variant="body1">
               Don&apos;t have an account?{" "}
+              <Link
+                component={RouterLink}
+                to="/register"
+                variant="h6"
+                underline="hover"
+              >
+                Sign up
+              </Link>
             </Typography>
           </form>
         </Container>

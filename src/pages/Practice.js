@@ -5,6 +5,7 @@ import AddIcon from "@material-ui/icons/Add";
 import List from "@mui/material/List";
 import User from "../components/User";
 import { LinearProgress } from "@material-ui/core";
+import axios from 'axios';
 
 export default function Practice() {
   const [counter, setCounter] = useState(0);
@@ -15,10 +16,9 @@ export default function Practice() {
   };
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_BACKEND_API)
-      .then((response) => response.json())
-      .then((data) => {
-        setEmail(data);
+    axios.get(process.env.REACT_APP_BACKEND_API)
+      .then((response) => {
+        setEmail(response.data);
       })
       .catch((err) => {
         console.error(err);
