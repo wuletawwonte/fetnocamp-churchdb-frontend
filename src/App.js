@@ -7,13 +7,14 @@ import { useRoutes } from "react-router-dom";
 import routes from "./routes";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user] = useState(null);
   const content = useRoutes(routes);
 
   return (
     <>
+
       <ThemeProvider theme={theme}>
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user }}>
             {content}
         </UserContext.Provider>
       </ThemeProvider>

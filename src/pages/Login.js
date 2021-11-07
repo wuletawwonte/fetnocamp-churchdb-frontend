@@ -1,4 +1,4 @@
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useRef, useContext } from "react";
 import {
   Box,
@@ -9,26 +9,28 @@ import {
   Link
 } from "@material-ui/core";
 import { UserContext } from "../context/UserContext";
-import axios from "axios";
+// import axios from "axios";
 
 const Login = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
   const username = useRef("");
   const password = useRef("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axios
-      .post("https://fetnocampbackend.herokuapp.com/user/login", {
-        username: username.current.value,
-        password: password.current.value,
-      })
-      .then((res) => {
-          console.log(res.data);
-      })
-      .catch((err) => {
-        setUser(JSON.stringify(err.data, null, 2));
-      });
+    navigate('/user/dashboard');
+    // axios
+    //   .post("https://fetnocampbackend.herokuapp.com/user/login", {
+    //     username: username.current.value,
+    //     password: password.current.value,
+    //   })
+    //   .then((res) => {
+    //       console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     setUser(JSON.stringify(err.data, null, 2));
+    //   });
   };
 
   return (
