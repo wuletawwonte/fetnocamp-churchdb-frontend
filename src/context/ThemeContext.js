@@ -3,12 +3,12 @@ import { createTheme } from "@material-ui/core";
 const theme = createTheme({
   palette: {
     background: {
-      default: "#f4f6f8",
+      default: "#fb8c00",
       paper: "#ffffff",
     },
     primary: {
       contrastText: "#ffffff",
-      main: "#5664d2",
+      main: "#fb8c00",
     },
     text: {
       primary: "#172b4d",

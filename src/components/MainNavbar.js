@@ -8,6 +8,7 @@ const MainNavbar = (props) => {
     {...props}
     position="sticky"
     color="primary"
+    elevation="0"
   >
     <Toolbar variant="regular">
       <Typography className="navbarTitle" variant="h4" component="div" onClick={() => {navigate('/');}}>
