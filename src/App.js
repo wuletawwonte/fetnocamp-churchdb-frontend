@@ -1,64 +1,24 @@
-import { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import AddIcon from "@material-ui/icons/Add";
-import List from '@mui/material/List';
-import User from './components/User';
-import './app.css';
-
-const api = "https://fetnocampbackend.herokuapp.com/user";
+import { useState } from "react";
+import "./app.css";
+import { UserContext } from "./context/UserContext";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "./context/ThemeContext";
+import { useRoutes } from "react-router-dom";
+import routes from "./routes";
 
 function App() {
-  const [counter, setCounter] = useState(0);
-  const [email, setEmail] = useState([]);
-
-  const increment = () => {
-    setCounter(counter + 1);
-  };
-
-  useEffect(() => {
-    fetch(api)
-      .then((response) => response.json())
-      .then((data) => {
-        setEmail(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const [user] = useState(null);
+  const content = useRoutes(routes);
 
   return (
-    <Container>
-      <header className="App-header">
-        <h2>{counter}</h2>
-        <Button
-          startIcon={<AddIcon />}
-          variant="contained"
-          color="secondary"
-          onClick={increment}
-        >
-          Increment
-        </Button>
-        <hr />
-        {email.length !== 0 ? (
-          <>
-            <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-            >
-              {email.map((user, idx) => {
-                return (
-                  <div key={idx}>
-                    <User>{user}</User>
-                  </div>
-                );
-              })}
-            </List>
-          </>
-        ) : (
-          "Loading..."
-        )}
-      </header>
-    </Container>
+    <>
+
+      <ThemeProvider theme={theme}>
+        <UserContext.Provider value={{ user }}>
+            {content}
+        </UserContext.Provider>
+      </ThemeProvider>
+    </>
   );
 }
 

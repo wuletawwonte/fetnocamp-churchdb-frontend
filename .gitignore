@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# vscode folder
+.vscode
+
 # testing
 /coverage
 
@@ -22,3 +25,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# environment constants
+.env
